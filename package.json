@@ -1,0 +1,45 @@
+{
+  "name": "batch-pdf-markup",
+  "version": "0.1.0",
+  "description": "Simple desktop app for previewing a PDF, drawing a reusable rectangle template, and applying it to individual PDFs or folders.",
+  "productName": "Batch PDF Markup",
+  "author": "psun",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis --x64",
+    "dist:win:portable": "electron-builder --win portable --x64",
+    "pack:dir": "electron-builder --dir"
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "5.2.133"
+  },
+  "devDependencies": {
+    "electron": "^36.2.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.psun.batchpdfmarkup",
+    "asar": true,
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

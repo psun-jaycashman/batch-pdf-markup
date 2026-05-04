@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Batch PDF Markup Tool</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="panel hero-panel">
+          <p class="eyebrow">MVP Desktop Tool</p>
+          <h1>Batch PDF Markup</h1>
+          <p class="panel-copy">
+            Open a sample PDF, draw one reusable rectangle, then apply it to a single
+            file or a whole folder.
+          </p>
+          <button id="open-pdf-button" class="primary-button">Open PDF</button>
+        </div>
+
+        <div class="panel">
+          <div class="section-header">
+            <h2>Template</h2>
+            <button id="clear-template-button" class="secondary-button">Clear</button>
+          </div>
+
+          <label class="field">
+            <span>Template name</span>
+            <input id="template-name-input" type="text" value="Roof Review Box" />
+          </label>
+
+          <label class="field">
+            <span>Shape type</span>
+            <select id="shape-type-input">
+              <option value="rectangle">Rectangle</option>
+              <option value="ellipse">Ellipse</option>
+              <option value="textbox">Textbox</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Stroke color</span>
+            <div class="color-field">
+              <input
+                id="stroke-color-picker"
+                class="color-picker"
+                type="color"
+                value="#d6412f"
+                aria-label="Stroke color picker"
+              />
+              <input
+                id="stroke-color-input"
+                type="text"
+                inputmode="text"
+                spellcheck="false"
+                value="#d6412f"
+                placeholder="#d6412f"
+              />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Stroke width</span>
+            <input id="stroke-width-input" type="number" min="1" max="12" step="1" value="3" />
+          </label>
+
+          <label class="field">
+            <span>Text content</span>
+            <input id="label-input" type="text" value="REVIEW" />
+          </label>
+
+          <label class="field">
+            <span>Text color</span>
+            <div class="color-field">
+              <input
+                id="text-color-picker"
+                class="color-picker"
+                type="color"
+                value="#d6412f"
+                aria-label="Text color picker"
+              />
+              <input
+                id="text-color-input"
+                type="text"
+                inputmode="text"
+                spellcheck="false"
+                value="#d6412f"
+                placeholder="#d6412f"
+              />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Font size</span>
+            <input id="font-size-input" type="number" min="8" max="72" step="1" value="18" />
+          </label>
+
+          <label class="field checkbox-field">
+            <span>Fill shape</span>
+            <div class="checkbox-row">
+              <input id="fill-enabled-input" type="checkbox" />
+              <label for="fill-enabled-input">Use fill color</label>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Fill color</span>
+            <div class="color-field">
+              <input
+                id="fill-color-picker"
+                class="color-picker"
+                type="color"
+                value="#ffd6cc"
+                aria-label="Fill color picker"
+              />
+              <input
+                id="fill-color-input"
+                type="text"
+                inputmode="text"
+                spellcheck="false"
+                value="#ffd6cc"
+                placeholder="#ffd6cc"
+              />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Fill opacity</span>
+            <div class="range-field">
+              <input id="fill-opacity-input" type="range" min="0" max="100" step="1" value="28" />
+              <div id="fill-opacity-value" class="range-value">28%</div>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Page rule</span>
+            <select id="page-rule-input">
+              <option value="first_page">First page</option>
+              <option value="all_pages">All pages</option>
+              <option value="odd_pages">Odd pages only</option>
+              <option value="even_pages">Even pages only</option>
+              <option value="specific_pages">Specific pages</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Specific pages</span>
+            <input
+              id="page-number-input"
+              type="text"
+              inputmode="text"
+              spellcheck="false"
+              value="1"
+              placeholder="1, 3, 8, 9"
+            />
+          </label>
+
+          <div class="button-row">
+            <button id="save-template-button" class="secondary-button">Save Template</button>
+            <button id="load-template-button" class="secondary-button">Load Template</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Export</h2>
+          <p class="panel-copy compact">
+            Export the current PDF or apply the template to every PDF in a folder.
+          </p>
+          <button id="export-pdf-button" class="primary-button">Export Current PDF</button>
+
+          <div class="folder-grid">
+            <button id="input-folder-button" class="secondary-button">Input Folder</button>
+            <div id="input-folder-path" class="path-pill">No folder selected</div>
+            <button id="output-folder-button" class="secondary-button">Output Folder</button>
+            <div id="output-folder-path" class="path-pill">No folder selected</div>
+          </div>
+
+          <button id="batch-apply-button" class="primary-button muted-button">
+            Apply Template To Folder
+          </button>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <div class="workspace-header">
+          <div>
+            <p class="eyebrow">Preview</p>
+            <h2 id="document-title">No PDF loaded</h2>
+            <div class="page-navigation">
+              <button id="previous-page-button" class="secondary-button nav-button" disabled>
+                Previous
+              </button>
+              <div id="page-indicator" class="page-indicator">Page 0 of 0</div>
+              <button id="next-page-button" class="secondary-button nav-button" disabled>
+                Next
+              </button>
+            </div>
+            <div class="zoom-navigation">
+              <button id="zoom-out-button" class="secondary-button nav-button" type="button">
+                -
+              </button>
+              <div id="zoom-indicator" class="page-indicator">100%</div>
+              <button id="zoom-in-button" class="secondary-button nav-button" type="button">
+                +
+              </button>
+            </div>
+          </div>
+          <div id="status-message" class="status-message">Draw a rectangle after opening a PDF.</div>
+        </div>
+
+        <div class="viewer-panel">
+          <div id="pdf-pages" class="pdf-pages hidden"></div>
+          <div id="empty-state" class="empty-state">
+            <p>Open a PDF to start the scrollable page preview.</p>
+            <p>Click a page to make it active, then drag a rectangle on that page.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

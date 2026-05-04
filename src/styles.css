@@ -1,0 +1,466 @@
+:root {
+  --background: #ebe4d7;
+  --panel: rgba(255, 252, 246, 0.92);
+  --panel-border: rgba(88, 71, 52, 0.16);
+  --ink: #2d261f;
+  --muted: #6f6559;
+  --accent: #ba4b33;
+  --accent-dark: #8e3321;
+  --accent-soft: #f3d9cf;
+  --teal: #255f5d;
+  --shadow: 0 18px 40px rgba(56, 41, 24, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.65), transparent 30%),
+    linear-gradient(135deg, #efe7d8 0%, #e0d3bf 100%);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  height: 100vh;
+  gap: 20px;
+  padding: 20px;
+}
+
+.sidebar,
+.workspace {
+  min-height: 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  padding-right: 6px;
+}
+
+.panel,
+.viewer-panel,
+.workspace-header {
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.panel {
+  padding: 20px;
+}
+
+.hero-panel {
+  background:
+    linear-gradient(145deg, rgba(255, 247, 240, 0.98), rgba(246, 236, 223, 0.95)),
+    var(--panel);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 34px;
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+.panel-copy {
+  margin: 10px 0 18px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.panel-copy.compact {
+  margin-top: 8px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.field span {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  border: 1px solid rgba(88, 71, 52, 0.18);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+}
+
+.checkbox-field {
+  gap: 10px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(88, 71, 52, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+}
+
+.checkbox-row input {
+  width: auto;
+  margin: 0;
+}
+
+.checkbox-row label {
+  font-size: 14px;
+}
+
+.color-field {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.color-picker {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 14px;
+  border: 1px solid rgba(88, 71, 52, 0.18);
+  background: transparent;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-picker::-webkit-color-swatch {
+  border: 0;
+  border-radius: 13px;
+}
+
+.range-field {
+  display: grid;
+  grid-template-columns: 1fr 64px;
+  gap: 10px;
+  align-items: center;
+}
+
+.range-field input[type="range"] {
+  padding: 0;
+}
+
+.range-value {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  border: 1px solid rgba(88, 71, 52, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.primary-button,
+.secondary-button {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  transform: translateY(-1px);
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff7f2;
+  box-shadow: 0 14px 30px rgba(186, 75, 51, 0.24);
+}
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--ink);
+  border: 1px solid rgba(88, 71, 52, 0.12);
+}
+
+.muted-button {
+  margin-top: 16px;
+}
+
+.section-header,
+.button-row,
+.workspace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.button-row {
+  margin-top: 8px;
+}
+
+.page-navigation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.zoom-navigation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.nav-button {
+  padding: 10px 14px;
+}
+
+.nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.page-indicator {
+  min-width: 110px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(88, 71, 52, 0.1);
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.folder-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 10px 12px;
+  align-items: center;
+}
+
+.path-pill {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(88, 71, 52, 0.1);
+  color: var(--muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workspace {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+  min-height: 0;
+}
+
+.workspace-header {
+  padding: 18px 20px;
+}
+
+.status-message {
+  max-width: 340px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.4;
+}
+
+.viewer-panel {
+  position: relative;
+  padding: 24px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.pdf-pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  min-height: 100%;
+}
+
+.pdf-pages.hidden {
+  display: none;
+}
+
+.pdf-page {
+  width: 100%;
+  max-width: 980px;
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(255, 252, 246, 0.72);
+  border: 1px solid rgba(88, 71, 52, 0.1);
+  transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.pdf-page.active-page {
+  border-color: rgba(186, 75, 51, 0.5);
+  box-shadow: 0 14px 28px rgba(186, 75, 51, 0.14);
+}
+
+.pdf-page:hover {
+  transform: translateY(-1px);
+}
+
+.pdf-page-header {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pdf-page-label {
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pdf-page-tag {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.pdf-page-frame {
+  position: relative;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(88, 71, 52, 0.14);
+  background:
+    linear-gradient(180deg, rgba(245, 239, 230, 0.95), rgba(239, 231, 219, 0.95));
+}
+
+.pdf-page-frame.page-has-preview .pdf-page-loading {
+  display: none;
+}
+
+.pdf-page-canvas,
+.pdf-page-overlay {
+  display: block;
+}
+
+.pdf-page-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.pdf-page-overlay.is-interactive {
+  cursor: crosshair;
+}
+
+.pdf-page-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  background:
+    linear-gradient(180deg, rgba(250, 245, 237, 0.82), rgba(246, 239, 229, 0.9));
+}
+
+.empty-state {
+  min-height: 100%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 1120px) {
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .status-message {
+    text-align: left;
+  }
+
+  .sidebar {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .workspace-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
